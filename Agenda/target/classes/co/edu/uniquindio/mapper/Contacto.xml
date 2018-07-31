@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace con el que se hará referencia a este mapper -->
+<mapper namespace="Contacto">
+	<!-- el resultado que arroje el mapper va a ser de tipo contacto y va a 
+		tener esas propiedades asociadas a cada una de las columnas de la BD -->
+	<resultMap id="result" type="Contacto">
+		<result property="IDENTIFICADOR" column="IDENTIFICADOR" />
+		<result property="NOMBRE" column="NOMBRE" />
+		<result property="APELLIDO" column="APELLIDO" />
+		<result property="NUMERO" column="NUMERO" />
+	</resultMap>
+	<!-- Operacion para seleccionar todo de la tabla contactos y lo devuelve 
+		a result -->
+	<select id="selectAll" resultMap="result">
+		SELECT * FROM contacto
+	</select>
+	<!-- Operacion para seleccionar un contacto por id y lo devuelve a result -->
+	<select id="selectById" parameterType="int" resultMap="result">
+		SELECT *
+		FROM contacto WHERE IDENTIFICADOR = ${IDENTIFICADOR}
+	</select>
+	<!-- Operacion para insertar en la tabla contactos y recibe un objeto de 
+		tipo contacto -->
+	<insert id="insert" parameterType="Contacto">
+		INSERT INTO CONTACTO
+		(IDENTIFICADOR,NOMBRE,APELLIDO,NUMERO) VALUES
+		(${IDENTIFICADOR},'${NOMBRE}','${APELLIDO}','${NUMERO}')
+	</insert>
+	<!-- Operacion para actualizar en la tabla contactos un contacto y recibe 
+		un objeto de tipo contacto -->
+	<update id="update" parameterType="Contacto">
+		UPDATE contacto
+		SET NOMBRE =
+		'${NOMBRE}' ,
+		APELLIDO='${APELLIDO}',
+		NUMERO='${NUMERO}'
+
+		WHERE
+		IDENTIFICADOR = ${IDENTIFICADOR}
+	</update>
+	<!-- Operacion para eliminar en la tabla contactos y recibe un objeto de 
+		tipo contacto -->
+	<delete id="delete" parameterType="Contacto">
+		DELETE from contacto WHERE
+		IDENTIFICADOR = ${IDENTIFICADOR}
+	</delete>
+</mapper>

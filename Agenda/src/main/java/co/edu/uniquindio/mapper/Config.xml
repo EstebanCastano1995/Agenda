@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<!-- lista de con el que se va a llamar a cada una de las entidades que se 
+		van a mappear y el tipo a el tipo de dato al que se va a mappear -->
+	<typeAliases>
+		<typeAlias alias="Contacto" type="co.edu.uniquindio.vo.Contacto" />
+	</typeAliases>
+
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<!-- connecting to Local Oracle -->
+			<dataSource type="POOLED">
+				<property name="driver" value="oracle.jdbc.OracleDriver" />
+				<property name="url" value="jdbc:oracle:thin:@localhost:1521:XE" />
+				<!-- usuario y contraseña de la BD a la que se van a conectar -->
+				<property name="username" value="MyBatis" />
+				<property name="password" value="1234" />
+			</dataSource>
+		</environment>
+	</environments>
+	<!-- Lista de objetos que se van a mappear y su configuracion para mappear-->
+	<mappers>
+		<mapper resource="co/edu/uniquindio/mapper/Contacto.xml" />
+	</mappers>
+</configuration>
